@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'manywords/command'
+
+Manywords::Command.run
+
