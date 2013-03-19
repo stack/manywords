@@ -12,14 +12,14 @@ module Manywords
       main do |letters, pattern = ''|
         # Make sure the given dictionary exists
         unless File.exists? options['dictionary']
-          $stderr.puts "Could not load the dictionary"
+          fatal "Could not load the dictionary"
           return
         end
 
         # Load the dictionary
         dictionary = DictionaryNode.new
         File.open(options['dictionary'], 'r') do |file|
-          puts "Reading the dictionary..."
+          info "Reading the dictionary..."
 
           file.each_line do |line|
             # Skip proper nouns
@@ -36,7 +36,7 @@ module Manywords
             dictionary.add_word line
           end
 
-          puts "Read #{dictionary.count} words."
+          info "Read #{dictionary.count} words."
         end
 
         # Construct the pattern if given
@@ -57,7 +57,8 @@ module Manywords
       end
 
       version     Manywords::VERSION
-      description 'Determine word combinations'
+      description 'Determine word combinations given a series of letters and an optional regular expression to filter.'
+
       arg         :letters, :required
       arg         :pattern, :optional
 

@@ -20,7 +20,13 @@ module Manywords
           next_available = available.dup
           next_available.delete_at(idx)
 
-          permutations prefix + [ letter ], next_available, &block
+          if letter == '+'
+            ('a'..'z').each do 
+              |l| permutations prefix + [ l ], next_available, &block
+            end
+          else
+            permutations prefix + [ letter ], next_available, &block
+          end
         end
       end
     end
